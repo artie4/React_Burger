@@ -117,7 +117,17 @@ class BurgerBuilder extends Component {
         //         console.log(error);
         //         this.setState({ loading: false, purchasing: false });
         //     })
-        this.props.history.push();
+        const queryParams = [];
+
+        for (let i in this.state.ingredients) {
+            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        }
+        const queryString = queryParams.join('&');
+
+        this.props.history.push({
+            pathname: '/checkout',
+            search: '?' + queryString
+        });
     }
 
     render() {
@@ -135,7 +145,7 @@ class BurgerBuilder extends Component {
         let burger = this.state.error ? <p>Data cant't be fetched</p> : <Spinner />
 
         if (this.state.ingredients) {
-            burger =
+            burger = (
                 <Aux>
                     <Burger ingredients={this.state.ingredients} />
                     <BuildControls
@@ -147,6 +157,7 @@ class BurgerBuilder extends Component {
                         price={this.state.totalPrice}
                     />
                 </Aux>
+            );
 
             orderSummary = <OrderSummary
                 ingredients={this.state.ingredients}
