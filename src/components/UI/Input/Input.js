@@ -5,11 +5,21 @@ import classes from './Input.css';
 const input = (props) => {
 
     let inputElement = null;
+    const inputClasses = [classes.InputElement];   
+    
+    let validationError = null;
+    if (props.invalid && props.touched) {
+        validationError = <p className={classes.ValidationError}>Please enter a valid value!</p>;
+    }
+
+    if (props.invalid && props.shouldValidate && props.touched) {
+        inputClasses.push(classes.Invalid);
+    } 
 
     switch (props.elementType) {
         case ('input'):
             inputElement = <input
-                className={classes.InputElement}
+                className={inputClasses.join(' ')}
                 value={props.value}
                 {...props.elementConfig}
                 onChange={props.changed}
@@ -50,6 +60,7 @@ const input = (props) => {
         <div className={classes.Input}>
             <label className={classes.Label}>{props.label}</label>
             {inputElement}
+            {validationError}
         </div>
     )
 }
