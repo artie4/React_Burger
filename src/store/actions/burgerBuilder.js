@@ -22,20 +22,20 @@ export const setIngredients = (ingredients) => {
     };
 };
 
-export const fetchIngredientFailed = () => {
+export const fetchIngredientsFailed = () => {
     return {
         type: actionTypes.FETCH_INGREDIENTS_FAILED
     }
 }
 
-export const initIngredients = () => {
+export const initIngredients = (token) => {
     return dispatch => {
-        axios.get('https://react-my-burger-repl.firebaseio.com/ingredients.json')
+        axios.get(`https://react-my-burger-repl.firebaseio.com/ingredients.json?auth=${token}`)
         .then(response => {
             dispatch(setIngredients(response.data));
         })
         .catch( error => {
-            dispatch(fetchIngredientFailed());
+            dispatch(fetchIngredientsFailed());
         });
     };
 };
