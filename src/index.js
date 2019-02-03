@@ -11,7 +11,7 @@ import burgerBuilderReducer from './store/reducers/burgerBuilder';
 import orderReducer from './store/reducers/order';
 import authReducer from './store/reducers/authen';
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnhancers = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
 
 const rootReducer = combineReducers({
     burgerBuilder: burgerBuilderReducer,
@@ -29,7 +29,7 @@ const app = (
             <App/>
         </BrowserRouter>
     </Provider>
-)
+);
 
 ReactDOM.render(app, document.getElementById('root'));
 registerServiceWorker();
