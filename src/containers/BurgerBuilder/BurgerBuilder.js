@@ -18,7 +18,7 @@ export class BurgerBuilder extends Component {
     };
 
     componentDidMount() {
-        this.props.onInitIngredients(this.props.token);
+        this.props.onInitIngredients();
     }
 
     updatePurchaseState(ingredients) {

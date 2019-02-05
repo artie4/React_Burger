@@ -4,10 +4,11 @@ import * as actions from '../actions';
 
 
 export function* initIngredientsSaga() {
-
+    debugger
     try {
-        const response = yield axios.get(`https://react-my-burger-repl.firebaseio.com/ingredients.json`)
+        const response = yield axios.get(`https://react-my-burger-repl.firebaseio.com/ingredients.json`);
         yield put(actions.setIngredients(response.data));
+
     } catch (error) {
         yield put(actions.fetchIngredientsFailed());
     }
