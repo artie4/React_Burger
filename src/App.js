@@ -28,9 +28,7 @@ const app = props => {
         <Switch>
             <Route path="/auth"
                 // component={asyncAuth}
-                   render={() => {
-                       return <Auth/>
-                   }}
+                   render={props => <Auth {...props}/>}
             />
             <Route path="/" exact component={BurgerBuilder}/>
             <Redirect to="/"/>
@@ -43,12 +41,12 @@ const app = props => {
                 <Route
                     path="/checkout"
                     // component={asycCheckout}
-                    render={() => <Checkout/> }
+                    render={props => <Checkout {...props} /> }
                 />
                 <Route
                     path="/orders"
                     // component={asyncOrders}
-                    render={() => <Orders/> }
+                    render={props => <Orders {...props} /> }
                 />
                 <Route path="/logout" component={Logout}/>
                 <Route path="/" exact component={BurgerBuilder}/>
@@ -63,7 +61,7 @@ const app = props => {
             </Layout>
         </React.Fragment>
     );
-}
+};
 
 
 const mapStateToProps = state => {
